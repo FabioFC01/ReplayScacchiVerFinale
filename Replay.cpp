@@ -1,5 +1,6 @@
-#include "Replay.h"
+//PANOZZO ELISA SILENE
 
+#include "Replay.h"
 
 
 using namespace std;
@@ -47,13 +48,15 @@ Replay::Replay() {
 
 void Replay::stampaSuFile(string nome_file_log, string file_output) {
 	//flusso d'ingresso
-	ifstream file(nome_file_log);
+	ifstream file;
+	file.open(nome_file_log, std::ifstream::in);
 
-	/*
-	if (!file.is_open()) {
-		throw new Exception("Il file non può essere aperto");
+	//se ci sono problemi lancia l'eccezione
+	if (!file.good()) {
+		throw Exception("Problemi con l'apertura del flusso ifstream");
 	}
-	*/
+
+	
 
 	char temp;
 	string line;
@@ -62,8 +65,6 @@ void Replay::stampaSuFile(string nome_file_log, string file_output) {
 	ofstream out;
 	//apertura flusso
 	out.open(file_output);
-
-	//print();
 
 	//stampa su file
 	for (int riga = 7; riga >= 0; riga--) {   //stampa su file 
@@ -76,16 +77,14 @@ void Replay::stampaSuFile(string nome_file_log, string file_output) {
 	out << "  " << "ABCDEFGH" << endl << endl;
 
 
-
 	if (file.is_open()) {
 
-		while (getline(file, line)) {	//dovrebbe fare una lettura riga per riga
+		while (getline(file, line)) {	//lettura riga per riga
 
 			//stringa line ha la riga
 
 
 			//stampiamo un po' di spazio
-			//cout << " ----------------------------------------" << endl << endl;
 			out << " ----------------------------------------" << endl << endl;
 
 
@@ -139,8 +138,6 @@ void Replay::stampaSuFile(string nome_file_log, string file_output) {
 			//e mettiamo lo spazio nella casella di partenza
 			replay[dati[1]][dati[0]] = ' ';
 
-			//print();
-
 			//stampa su file
 			for (int riga = 7; riga >= 0; riga--) {   //stampa su file 
 				out << (riga + 1) << " ";
@@ -151,10 +148,6 @@ void Replay::stampaSuFile(string nome_file_log, string file_output) {
 			}
 			out << "  " << "ABCDEFGH" << endl << endl;
 			
-
-
-
-
 
 		}
 		//fine while
@@ -177,19 +170,17 @@ void Replay::stampaSuFile(string nome_file_log, string file_output) {
 void Replay::stampaSchermo(string nome_file) {
 
 	//flusso d'ingresso
-	ifstream file(nome_file);
+	ifstream file;
+	file.open(nome_file, std::ifstream::in);
 
-	/*
-	if (!file.is_open()) {
-		throw new Exception("Il file non può essere aperto");
+	//se ci sono problemi lancia l'eccezione
+	if (!file.good()) {
+		throw Exception("Problemi con l'apertura del flusso ifstream");
 	}
-	*/
+	
 
 	char temp;
 	string line;
-
-
-	//print();
 
 	//ora stampiamo la scacchiera a schermo
 	for (int riga = 7; riga >= 0; riga--) {
@@ -202,9 +193,6 @@ void Replay::stampaSchermo(string nome_file) {
 	cout << "  " << "ABCDEFGH" << endl << endl;
 
 	
-
-
-
 	if (file.is_open()) {
 
 		while (getline(file, line)) {	//dovrebbe fare una lettura riga per riga
@@ -272,9 +260,6 @@ void Replay::stampaSchermo(string nome_file) {
 			replay[dati[1]][dati[0]] = ' ';
 
 
-
-			//print();
-
 			//ora stampiamo la scacchiera a schermo
 			for (int riga = 7; riga >= 0; riga--) {
 				cout << (riga + 1) << " ";
@@ -284,8 +269,6 @@ void Replay::stampaSchermo(string nome_file) {
 				cout << endl;
 			}
 			cout << "  " << "ABCDEFGH" << endl << endl;
-
-
 
 
 
@@ -305,33 +288,5 @@ void Replay::stampaSchermo(string nome_file) {
 	out.close();
 
 
-
-
-
-
-}
-
-void Replay::print() {
-
-
-	for (int riga = 7; riga >= 0; riga--) {
-		cout << (riga + 1) << " ";
-		for (int colonna = 0; colonna < 8; colonna++) {
-			cout << replay[riga][colonna];
-		}
-		cout << endl;
-	}
-	cout << "  " << "ABCDEFGH" << endl << endl;
-
-	out.open("replay.txt");
-
-	for (int riga = 7; riga >= 0; riga--) {
-		out << (riga + 1) << " ";
-		for (int colonna = 0; colonna < 8; colonna++) {
-			out << replay[riga][colonna];
-		}
-		out << endl;
-	}
-	out << "  " << "ABCDEFGH" << endl << endl;
 
 }

@@ -1,27 +1,11 @@
+//PANOZZO ELISA SILENE
+
 #include "Replay.h"
 #include <iostream>
 #include <fstream>
 using namespace std;
 
 
-/*
-	int argc: è un parametro di tipo intero. Rappresenta il
-	numero degli argomenti effettivamente passati al
-	programma nella linee di comando con cui si invoca la
-	sua esecuzione. Anche il nome stesso del programma
-	(nell'esempio, prog) è considerato un argomento,
-	quindi argc vale sempre almeno 1
-
-	---
-
-	char **argv: è un puntatore a un puntatore a
-	carattere, ovvero un array di stringhe.
-	Ciascuna stringa nel vettore contiene un diverso
-	argomento. Gli argomenti sono memorizzati nel vettore
-	nell'ordine con cui sono dati dall'utente.
-	argv[0] contiene il nome del programma stesso
-
-*/
 int main(int argc, char* argv[]) {
 
 
@@ -43,7 +27,12 @@ int main(int argc, char* argv[]) {
 	}
 
 	else {
-		rep.stampaSchermo("Test.txt");
+		try {
+			rep.stampaSchermo("Test.txt");
+		}
+		catch (Exception& e) {
+			cout << e.what() << endl;
+		}
 
 	}
 
